@@ -1,0 +1,14 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/corvin.html" }
+  ],
+  "routes": [
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/cart", "dest": "/cart.html" },
+    { "src": "/oversized", "dest": "/oversized.html" },
+    { "src": "/regular", "dest": "/regular.html" },
+    { "src": "/returns-policy", "dest": "/returns-policy.html" }
+  ]
+}
