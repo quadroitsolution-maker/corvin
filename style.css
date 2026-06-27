@@ -48,9 +48,44 @@ h4,
 h5,
 h6 {
     font-family: 'Barlow Condensed', sans-serif;
-    text-transform: uppercase;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
+
+/* Body-level text elements — always Inter */
+p,
+a,
+span,
+li,
+label,
+input,
+textarea,
+select,
+button,
+td,
+th,
+blockquote,
+cite {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Letter-spacing & uppercase for nav, labels, tags */
+.nav-links a,
+.category-label,
+.announcement-bar,
+.badge,
+.btn,
+.btn-primary,
+.btn-blue,
+.btn-grey,
+.btn-outline-white,
+.btn-select,
+.btn-submit,
+.about-cta-btn {
+    font-family: inherit; /* let each element's own rule define the family */
+}
+
 
 /* Announcement Bar / Marquee */
 .announcement-bar {
@@ -107,6 +142,25 @@ h6 {
     height: 50px;
     filter: invert(0.9);
     /* Inverts the provided black-on-white logo for dark mode */
+}
+
+/* Hero Banner */
+.hero-banner {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background-color: var(--bg-black);
+    border-bottom: 1px solid var(--accent-green);
+}
+
+.hero-animated-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--text-offwhite);
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 /* Hero Section */
@@ -416,14 +470,14 @@ h6 {
 }
 
 .split-content h2 {
-    font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3rem;
     font-weight: 700;
-    font-style: italic;
+    font-style: normal;
     color: var(--text-offwhite);
     margin-bottom: 25px;
-    text-transform: none;
-    letter-spacing: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .split-content p {
@@ -499,14 +553,14 @@ h6 {
 }
 
 .mii-content h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.2rem;
     font-weight: 700;
-    font-style: italic;
+    font-style: normal;
     margin-bottom: 15px;
     text-transform: uppercase;
     color: var(--text-offwhite);
-    letter-spacing: normal;
+    letter-spacing: 2px;
 }
 
 .mii-content p {
@@ -1240,10 +1294,14 @@ h6 {
 }
 
 .shop-title {
-    font-size: 2.8rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-size: 5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 0.95;
     margin-bottom: 30px;
+    color: var(--text-offwhite);
 }
 
 .shop-topbar {
@@ -1513,4 +1571,18 @@ h6 {
     .products-section {
         padding: 40px 16px;
     }
+}
+
+.typewriter-cursor {
+    animation: blink 0.75s step-end infinite;
+    font-weight: 300;
+}
+
+#typewriter,
+#hero-typewriter {
+    color: #aaa;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }

@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -17,7 +17,7 @@
 <body>
     <!-- Announcement Bar -->
     <div class="announcement-bar">
-        <!--marquee behavior="scroll" direction="left">FREE WORLDWIDE SHIPPING ON ALL ORDERS OVER $150 // NEW MILITARY
+        <marquee behavior="scroll" direction="left">FREE WORLDWIDE SHIPPING ON ALL ORDERS OVER $150 // NEW MILITARY
             SURPLUS COLLECTION OUT NOW</marquee>
     </div>
 
@@ -34,6 +34,11 @@
                 <a href="cart.html">CART (0)</a>
             </div>
         </nav>
+
+        <!-- Animated Banner -->
+        <div class="hero-banner">
+            <h2 class="hero-animated-title">Pick your <span id="hero-typewriter"></span><span class="typewriter-cursor">|</span></h2>
+        </div>
 
         <!-- Hero / Slider Section -->
         <section class="hero">
@@ -368,7 +373,7 @@
         <!-- Footer -->
         <footer class="site-footer">
             <div class="footer-top">
-                <h2 class="footer-marquee-text">Corvin Powerful</h2>
+                <h2 class="footer-marquee-text">Corvin <span id="typewriter"></span><span class="typewriter-cursor">|</span></h2>
             </div>
             <div class="footer-middle">
                 <p class="sale-text">SALE UP TO 40% OFF FOR ALL CLOTHES.</p>
@@ -396,6 +401,47 @@
                 <p>Copyright &copy; 2026 corvin.in. Powered by corvin.in.</p>
             </div>
         </footer>
+    <script>
+        function initTypewriter(elementId, words, typingSpeed, deletingSpeed, pauseEnd, pauseStart) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = words[wordIndex];
+                
+                if (isDeleting) {
+                    el.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    el.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let speed = isDeleting ? deletingSpeed : typingSpeed;
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    speed = pauseEnd;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    speed = pauseStart;
+                }
+
+                setTimeout(type, speed);
+            }
+
+            setTimeout(type, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTypewriter('typewriter', ['Powerful.', 'Precise.'], 80, 40, 1500, 300);
+            initTypewriter('hero-typewriter', ['Drip.', 'Poison.'], 80, 40, 1500, 300);
+        });
+    </script>
 </body>
 
 </html>
