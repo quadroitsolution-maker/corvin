@@ -1,9 +1,6 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/", "destination": "/corvin.html" }
-  ],
   "routes": [
+    { "src": "/", "dest": "/corvin.html" },
     { "src": "/about", "dest": "/about.html" },
     { "src": "/contact", "dest": "/contact.html" },
     { "src": "/cart", "dest": "/cart.html" },
