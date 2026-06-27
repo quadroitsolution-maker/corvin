@@ -1586,3 +1586,222 @@ cite {
 @keyframes blink {
     50% { opacity: 0; }
 }
+
+/* =============================================
+   PROMO SLIDESHOW  (between nav & hero-banner)
+   ============================================= */
+
+.promo-slideshow {
+    position: relative;
+    width: 100%;
+    height: 500px;          /* fixed height so abs children don't collapse it */
+    overflow: hidden;
+    background: #F0EDEA;
+}
+
+/* All slides stacked on top of each other, always in the DOM flow */
+.promo-slide {
+    position: absolute;
+    inset: 0;               /* top/right/bottom/left: 0 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    opacity: 0;
+    pointer-events: none;   /* invisible slides can't be clicked */
+    transition: opacity 0.7s ease;
+}
+
+/* The active slide fades in */
+.promo-slide-active {
+    opacity: 1;
+    pointer-events: auto;
+    position: absolute;     /* keep stacking in place */
+}
+
+/* ---- Text side (left ~45%) ---- */
+.promo-text-side {
+    flex: 0 0 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 50px 60px 70px;
+    background: #F0EDEA;
+}
+
+.promo-sub-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.promo-deal {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    border-bottom: 3px solid #111;
+    padding-bottom: 12px;
+    margin-bottom: 28px;
+}
+
+.promo-deal span {
+    color: #111;
+}
+
+.promo-category {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+
+.promo-cta {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #111;
+    color: #F0EDEA;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+    align-self: flex-start;
+}
+
+.promo-cta:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* ---- Image side (right ~55%) ---- */
+.promo-image-side {
+    flex: 0 0 55%;
+    background: #E4E1DC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: calc(100% - 48px);
+    height: calc(100% - 48px);
+    border: 2px dashed #bbb;
+    border-radius: 4px;
+    color: #aaa;
+}
+
+.promo-img-icon svg {
+    width: 56px;
+    height: 56px;
+    stroke: #bbb;
+}
+
+.promo-img-placeholder p {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bbb;
+}
+
+/* ---- Navigation dots ---- */
+.promo-nav-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.promo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #555;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.promo-dot-active {
+    background: #111;
+    border-color: #111;
+}
+
+/* ---- Arrow buttons ---- */
+.promo-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.75);
+    border: 1.5px solid #ccc;
+    color: #111;
+    font-size: 1.2rem;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s;
+    border-radius: 2px;
+}
+
+.promo-arrow:hover {
+    background: rgba(255,255,255,0.95);
+}
+
+.promo-arrow-prev { left: 18px; }
+.promo-arrow-next { right: 18px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .promo-slideshow {
+        height: 680px;      /* taller on mobile for stacked layout */
+    }
+
+    .promo-slide {
+        flex-direction: column;
+    }
+
+    .promo-text-side {
+        flex: 0 0 auto;
+        padding: 36px 24px 20px;
+    }
+
+    .promo-deal {
+        font-size: clamp(2.8rem, 14vw, 4rem);
+    }
+
+    .promo-image-side {
+        flex: 1;
+    }
+
+    .promo-img-placeholder {
+        width: calc(100% - 32px);
+        height: calc(100% - 32px);
+    }
+}

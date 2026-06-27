@@ -35,6 +35,72 @@
             </div>
         </nav>
 
+        <!-- Product Slideshow -->
+        <section class="promo-slideshow">
+            <!-- Slide 1 -->
+            <div class="promo-slide promo-slide-active">
+                <div class="promo-text-side">
+                    <p class="promo-sub-label">CORVIN'S</p>
+                    <h2 class="promo-deal">BUY 3<br><span>@1499</span></h2>
+                    <p class="promo-category">CORVIN'S<br>OVERSIZED TSHIRTS</p>
+                    <a href="oversized.html" class="promo-cta">SHOP NOW</a>
+                </div>
+                <div class="promo-image-side">
+                    <div class="promo-img-placeholder">
+                        <span class="promo-img-icon">
+                            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="14" width="48" height="36" rx="4"/><circle cx="22" cy="27" r="5"/><path d="M8 44l14-14 10 10 8-8 16 18"/></svg>
+                        </span>
+                        <p>Product Photo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="promo-slide">
+                <div class="promo-text-side">
+                    <p class="promo-sub-label">CORVIN'S</p>
+                    <h2 class="promo-deal">NEW<br><span>DROP</span></h2>
+                    <p class="promo-category">CORVIN'S<br>REGULAR TSHIRTS</p>
+                    <a href="regular.html" class="promo-cta">SHOP NOW</a>
+                </div>
+                <div class="promo-image-side">
+                    <div class="promo-img-placeholder">
+                        <span class="promo-img-icon">
+                            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="14" width="48" height="36" rx="4"/><circle cx="22" cy="27" r="5"/><path d="M8 44l14-14 10 10 8-8 16 18"/></svg>
+                        </span>
+                        <p>Product Photo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="promo-slide">
+                <div class="promo-text-side">
+                    <p class="promo-sub-label">LIMITED OFFER</p>
+                    <h2 class="promo-deal">FLAT<br><span>40% OFF</span></h2>
+                    <p class="promo-category">CORVIN'S<br>ESSENTIALS</p>
+                    <a href="#latest-drops" class="promo-cta">EXPLORE</a>
+                </div>
+                <div class="promo-image-side">
+                    <div class="promo-img-placeholder">
+                        <span class="promo-img-icon">
+                            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="14" width="48" height="36" rx="4"/><circle cx="22" cy="27" r="5"/><path d="M8 44l14-14 10 10 8-8 16 18"/></svg>
+                        </span>
+                        <p>Product Photo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slideshow Controls -->
+            <div class="promo-nav-dots">
+                <button class="promo-dot promo-dot-active" data-index="0" aria-label="Slide 1"></button>
+                <button class="promo-dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="promo-dot" data-index="2" aria-label="Slide 3"></button>
+            </div>
+            <button class="promo-arrow promo-arrow-prev" id="promoPrev" aria-label="Previous slide">&#8592;</button>
+            <button class="promo-arrow promo-arrow-next" id="promoNext" aria-label="Next slide">&#8594;</button>
+        </section>
+
         <!-- Animated Banner -->
         <div class="hero-banner">
             <h2 class="hero-animated-title">Pick your <span id="hero-typewriter"></span><span class="typewriter-cursor">|</span></h2>
@@ -440,6 +506,37 @@
         document.addEventListener('DOMContentLoaded', () => {
             initTypewriter('typewriter', ['Powerful.', 'Precise.'], 80, 40, 1500, 300);
             initTypewriter('hero-typewriter', ['Drip.', 'Poison.'], 80, 40, 1500, 300);
+
+            // Promo Slideshow
+            const slides = document.querySelectorAll('.promo-slide');
+            const dots   = document.querySelectorAll('.promo-dot');
+            let current  = 0;
+            let autoTimer;
+
+            function goTo(idx) {
+                slides[current].classList.remove('promo-slide-active');
+                dots[current].classList.remove('promo-dot-active');
+                current = (idx + slides.length) % slides.length;
+                slides[current].classList.add('promo-slide-active');
+                dots[current].classList.add('promo-dot-active');
+            }
+
+            function startAuto() {
+                autoTimer = setInterval(() => goTo(current + 1), 5000);
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                startAuto();
+            }
+
+            document.getElementById('promoNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+            document.getElementById('promoPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => { goTo(parseInt(dot.dataset.index)); resetAuto(); });
+            });
+
+            startAuto();
         });
     </script>
 </body>
