@@ -18,6 +18,8 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -25,6 +27,8 @@ body {
     color: var(--text-offwhite);
     font-family: 'Inter', sans-serif;
     position: relative;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Noise overlay across all backgrounds */
@@ -92,10 +96,11 @@ cite {
     background-color: var(--accent-green);
     color: var(--text-offwhite);
     text-transform: uppercase;
-    padding: 10px 0;
-    font-size: 0.9rem;
+    padding: 6px 0;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 2px;
+    overflow: hidden;
 }
 
 .announcement-bar marquee {
@@ -108,8 +113,10 @@ cite {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 14px 40px;
     border-bottom: 1px solid var(--accent-green);
+    position: relative;
+    z-index: 1000;
 }
 
 .nav-links {
@@ -139,9 +146,65 @@ cite {
 }
 
 .logo img {
-    height: 50px;
+    height: 40px;
     filter: invert(0.9);
     /* Inverts the provided black-on-white logo for dark mode */
+}
+
+/* Hamburger button — hidden on desktop */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1100;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--text-offwhite);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile nav drawer */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--bg-black);
+    border-bottom: 1px solid var(--accent-green);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+}
+
+.mobile-nav.open {
+    max-height: 300px;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 14px 24px;
+    color: var(--text-offwhite);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(75,83,32,0.3);
+    transition: background 0.2s, color 0.2s;
+}
+
+.mobile-nav a:hover {
+    background: rgba(75,83,32,0.15);
+    color: var(--accent-khaki);
 }
 
 /* Hero Banner */
@@ -155,7 +218,7 @@ cite {
 
 .hero-animated-title {
     font-family: 'Inter', sans-serif;
-    font-size: 3rem;
+    font-size: clamp(2rem, 6vw, 3rem);
     font-style: italic;
     font-weight: 600;
     color: var(--text-offwhite);
@@ -287,7 +350,7 @@ cite {
 }
 
 .section-header h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
     letter-spacing: 4px;
     color: var(--text-offwhite);
 }
@@ -379,6 +442,20 @@ cite {
 }
 
 /* Responsiveness */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 5rem;
+    }
+
+    .slide {
+        padding: 50px 40px;
+    }
+
+    .products-section {
+        padding: 70px 30px;
+    }
+}
+
 @media (max-width: 900px) {
     .hero {
         flex-direction: column;
@@ -388,21 +465,47 @@ cite {
     .slide {
         border-right: none;
         border-bottom: 1px solid var(--accent-green);
-        padding: 80px 40px;
+        padding: 60px 30px;
     }
 
     .slide:last-child {
         border-bottom: none;
     }
 
+    /* Hide desktop nav links, show hamburger */
     .navbar {
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
+        padding: 12px 20px;
+    }
+
+    .navbar > .nav-links {
+        display: none;
+    }
+
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: flex;
     }
 
     .hero h1 {
         font-size: 4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .slide {
+        padding: 40px 20px;
+    }
+
+    .announcement-bar {
+        font-size: 0.65rem;
+        padding: 5px 0;
     }
 }
 
@@ -412,7 +515,7 @@ cite {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    padding: 80px 50px;
+    padding: 60px 40px;
     background-color: var(--bg-black);
     color: var(--text-offwhite);
     text-align: center;
@@ -471,7 +574,7 @@ cite {
 
 .split-content h2 {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 6vw, 3rem);
     font-weight: 700;
     font-style: normal;
     color: var(--text-offwhite);
@@ -532,6 +635,7 @@ cite {
 .mii-content-wrapper {
     max-width: 500px;
     margin-left: 5%;
+    width: 100%;
 }
 
 .mii-card {
@@ -554,7 +658,7 @@ cite {
 
 .mii-content h3 {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
     font-weight: 700;
     font-style: normal;
     margin-bottom: 15px;
@@ -606,7 +710,7 @@ cite {
 
 .footer-marquee-text {
     font-family: 'Inter', sans-serif;
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
     font-style: italic;
     font-weight: 600;
     color: var(--text-offwhite);
@@ -678,7 +782,13 @@ cite {
 
 .footer-subscribe-col {
     flex: 1.5;
-    min-width: 300px;
+    min-width: 100%;
+}
+
+@media (min-width: 600px) {
+    .footer-subscribe-col {
+        min-width: 300px;
+    }
 }
 
 .subscribe-label {
@@ -723,10 +833,25 @@ cite {
 }
 
 /* Responsive updates for new sections */
+@media (max-width: 1024px) {
+    .features-section {
+        padding: 50px 30px;
+        gap: 20px;
+    }
+
+    .split-content {
+        padding: 70px 50px;
+    }
+
+    .footer-bottom {
+        padding: 50px 50px;
+    }
+}
+
 @media (max-width: 900px) {
     .features-section {
         grid-template-columns: repeat(2, 1fr);
-        padding: 60px 30px;
+        padding: 50px 24px;
     }
     
     .split-section {
@@ -734,16 +859,37 @@ cite {
     }
     
     .split-content {
-        padding: 60px 40px;
+        padding: 50px 30px;
     }
     
     .split-image {
-        min-height: 300px;
+        min-height: 280px;
     }
     
     .footer-bottom {
         flex-direction: column;
-        padding: 40px;
+        padding: 40px 30px;
+    }
+
+    .make-in-india-section {
+        padding: 60px 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .features-section {
+        grid-template-columns: 1fr 1fr;
+        padding: 40px 16px;
+        gap: 16px;
+    }
+
+    .split-content {
+        padding: 40px 20px;
+    }
+
+    .make-in-india-section {
+        padding: 50px 20px;
+        min-height: auto;
     }
 }
 
@@ -897,10 +1043,30 @@ cite {
 @media (max-width: 900px) {
     .about-intro {
         flex-direction: column;
+        padding: 0 24px;
+        gap: 30px;
     }
     
+    .about-philosophy, .about-team {
+        padding: 0 24px;
+    }
+
     .about-marquee-section h2 {
-        font-size: 3rem;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+    }
+}
+
+@media (max-width: 600px) {
+    .about-header {
+        padding: 40px 16px 20px;
+    }
+
+    .about-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .about-intro, .about-philosophy, .about-team {
+        padding: 0 16px;
     }
 }
 
@@ -1052,6 +1218,7 @@ cite {
     background-color: var(--bg-grey);
     padding: 40px;
     border: 1px solid var(--accent-green);
+    width: 100%;
 }
 
 .summary-title {
@@ -1101,6 +1268,7 @@ cite {
     
     .cart-summary {
         width: 100%;
+        padding: 30px 20px;
     }
     
     .cart-item {
@@ -1115,6 +1283,15 @@ cite {
     .item-total {
         width: 100%;
         text-align: left;
+    }
+
+    .cart-main {
+        padding: 40px 20px;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
     }
 }
 
@@ -1131,7 +1308,7 @@ cite {
 
 /* --- SHOP CATEGORY PAGE --- */
 .shop-main {
-    padding: 60px 40px;
+    padding: 50px 40px;
     background-color: var(--bg-black);
     color: var(--text-offwhite);
 }
@@ -1140,8 +1317,8 @@ cite {
     max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 50px;
+    grid-template-columns: 250px 1fr;
+    gap: 40px;
 }
 
 /* Sidebar */
@@ -1302,7 +1479,7 @@ cite {
 }
 
 .shop-title {
-    font-size: 5rem;
+    font-size: clamp(2.5rem, 6vw, 5rem);
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
@@ -1422,23 +1599,48 @@ cite {
     color: var(--text-offwhite);
 }
 
+@media (max-width: 1024px) {
+    .shop-main {
+        padding: 40px 24px;
+    }
+
+    .shop-container {
+        grid-template-columns: 220px 1fr;
+        gap: 30px;
+    }
+
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
 @media (max-width: 900px) {
+    .shop-main {
+        padding: 30px 16px;
+    }
+
     .shop-container {
         grid-template-columns: 1fr;
     }
     
     .shop-sidebar {
-        display: none; /* Hide sidebar on mobile for now, can be a toggle */
+        display: none; /* Hide sidebar on mobile; can be exposed via toggle */
     }
     
     .shop-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .shop-grid {
         grid-template-columns: 1fr;
+    }
+
+    .shop-main {
+        padding: 20px 12px;
     }
 }
 

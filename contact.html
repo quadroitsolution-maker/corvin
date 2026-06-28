@@ -523,6 +523,14 @@
             <a href="about.html">ABOUT</a>
             <a href="cart.html">CART (0)</a>
         </div>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="corvin.html#latest-drops">COLLECTIONS</a>
+        <a href="about.html">ABOUT</a>
+        <a href="cart.html">CART (0)</a>
     </nav>
 
     <!-- Contact Page -->
@@ -710,6 +718,17 @@
             <p>Copyright &copy; 2026 corvin.in. Powered by corvin.in.</p>
         </div>
     </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('navHamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                mobileNav.classList.toggle('open');
+            });
+        }
+    </script>
 
     <script>
         // Floating label behaviour
